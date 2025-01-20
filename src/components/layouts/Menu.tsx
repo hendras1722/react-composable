@@ -19,7 +19,6 @@ export default function ListMenu() {
   const route = useRoute()
   const menu = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: () => <FaHouse /> },
-    { name: 'Table', href: '/admin/table', icon: () => <FaTable /> },
     {
       name: 'Draggable',
       href: '/admin/draggable',
