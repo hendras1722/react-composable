@@ -38,48 +38,6 @@ Install the package using npm or yarn:
 npm install @msa_cli/react-composable
 ```
 
-## Usage
-
-Import the desired hook into your React component:
-
-```javascript
-import { useBase64 } from '@msa_cli/react-composable'
-
-function App() {
-  const { encode, decode } = useBase64()
-
-  const encodedString = encode('Hello, World!')
-  const decodedString = decode(encodedString)
-
-  return (
-    <div>
-      <p>Encoded: {encodedString}</p>
-      <p>Decoded: {decodedString}</p>
-    </div>
-  )
-}
-
-export default App
-```
-
-## Documentation
-
-### `useBase64`
-
-#### Usage
-
-```javascript
-const { encode, decode } = useBase64()
-```
-
-#### Methods
-
-- **`encode(input: string): string`**  
-  Encodes the given string into Base64 format.
-
-- **`decode(input: string): string`**  
-  Decodes the given Base64-encoded string back into its original format.
-
 ## Contributions
 
 Contributions are welcome! Feel free to submit issues or pull requests on our [GitHub repository](https://github.com/msa_cli/react-composable).
