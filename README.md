@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# @msa_cli/react-composable
 
-## Getting Started
+Welcome to **@msa_cli/react-composable**, a utility library designed to simplify your React projects by providing reusable and helpful React functions.
 
-First, run the development server:
+## Features
+
+This package offers easy-to-use React hooks and utilities to streamline your development process. Currently, the package includes:
+
+## features currently available
+
+### `useBase64`
+
+### `useDebounce`
+
+### `useDraggable`
+
+### `useDropZone`
+
+### `useFetch`
+
+### `useDateFormat`
+
+### `useStorage`
+
+### `useNetwork`
+
+### `useElementBounding`
+
+### `useScreenlock`
+
+### `useBreakPoints`
+
+## Installation
+
+Install the package using npm or yarn:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install @msa_cli/react-composable
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Import the desired hook into your React component:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```javascript
+import { useBase64 } from '@msa_cli/react-composable'
 
-## Learn More
+function App() {
+  const { encode, decode } = useBase64()
 
-To learn more about Next.js, take a look at the following resources:
+  const encodedString = encode('Hello, World!')
+  const decodedString = decode(encodedString)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  return (
+    <div>
+      <p>Encoded: {encodedString}</p>
+      <p>Decoded: {decodedString}</p>
+    </div>
+  )
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+export default App
+```
 
-## Deploy on Vercel
+## Documentation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `useBase64`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Usage
+
+```javascript
+const { encode, decode } = useBase64()
+```
+
+#### Methods
+
+- **`encode(input: string): string`**  
+  Encodes the given string into Base64 format.
+
+- **`decode(input: string): string`**  
+  Decodes the given Base64-encoded string back into its original format.
+
+## Contributions
+
+Contributions are welcome! Feel free to submit issues or pull requests on our [GitHub repository](https://github.com/msa_cli/react-composable).
+
+## License
+
+This package is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+
+---
+
+Start building faster and more efficiently with **@msa_cli/react-composable**!
