@@ -1,9 +1,7 @@
-import { cookies } from '@/configs/cookies.server'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest, response: NextResponse) {
   try {
-    cookies(response)
     return NextResponse.json({ success: true })
   } catch (error: unknown) {
     if (error instanceof Error) {
