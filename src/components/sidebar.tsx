@@ -15,17 +15,17 @@ export default function HideSidebarButton() {
         navbar.classList.add('translate-x-[-255px]')
         navbar.classList.remove('translate-x-0')
         menu.classList.remove('grid-cols-[255px_1fr]')
-        menu.classList.add('grid-cols-[53px_1fr]')
+        menu.classList.add('grid-cols-[70px_1fr]')
         sidebar.classList.remove('grid-cols-[255px_1fr]')
-        sidebar.classList.add('grid-cols-[53px_1fr]')
+        sidebar.classList.add('grid-cols-[70px_1fr]')
       }
     } else if (sidebar && menu && navbar) {
       navbar.classList.add('translate-x-0')
       navbar.classList.remove('translate-x-[-255px]')
 
-      menu.classList.remove('grid-cols-[53px_1fr]')
+      menu.classList.remove('grid-cols-[70px_1fr]')
       menu.classList.add('grid-cols-[255px_1fr]')
-      sidebar.classList.remove('grid-cols-[53px_1fr]')
+      sidebar.classList.remove('grid-cols-[70px_1fr]')
       sidebar.classList.add('grid-cols-[255px_1fr]')
     }
   }

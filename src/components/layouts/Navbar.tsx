@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <div
       id="sidebar_nav"
-      className="grid grid-cols-[255px_1fr] duration-300 ease-in-out"
+      className="grid grid-cols-[250px_1fr] duration-300 ease-in-out"
     >
       <div className="h-16 w-auto  border-b-2 border-gray-200 ">
         <nav
