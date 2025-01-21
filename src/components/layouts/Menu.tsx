@@ -3,14 +3,19 @@
 import { useRoute } from '@/composable/useRoute'
 import MenuSidebar from '../MenuSidebar'
 import {
+  FaArrowDownWideShort,
   FaCalendarDays,
+  FaClipboard,
   FaClock,
+  FaCodePullRequest,
   FaComputerMouse,
   FaDatabase,
   FaDownLeftAndUpRightToCenter,
   FaFile,
   FaHouse,
   FaNetworkWired,
+  FaRegBuilding,
+  FaScroll,
   FaTable,
   FaTarpDroplet,
 } from 'react-icons/fa6'
@@ -50,7 +55,7 @@ export default function ListMenu() {
       icon: () => <FaCalendarDays />,
     },
     {
-      name: 'network',
+      name: 'Network',
       href: '/admin/network',
       icon: () => <FaNetworkWired />,
     },
@@ -58,6 +63,31 @@ export default function ListMenu() {
       name: 'Fetching Data',
       href: '/admin/fetch',
       icon: () => <FaDownLeftAndUpRightToCenter />,
+    },
+    {
+      name: 'Element Bounding',
+      href: '/admin/element',
+      icon: () => <FaRegBuilding />,
+    },
+    {
+      name: 'Scroll lock',
+      href: '/admin/lockscreen',
+      icon: () => <FaScroll />,
+    },
+    {
+      name: 'Clipboard',
+      href: '/admin/clipboard',
+      icon: () => <FaClipboard />,
+    },
+    {
+      name: 'State History',
+      href: '/admin/stateHistory',
+      icon: () => <FaCodePullRequest />,
+    },
+    {
+      name: 'infinite scroll',
+      href: '/admin/infinitescroll',
+      icon: () => <FaArrowDownWideShort />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />

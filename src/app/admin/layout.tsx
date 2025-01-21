@@ -28,9 +28,9 @@ export default function RootLayoutAdmin({
         <Navbar />
         <div
           id="sidebar_menu"
-          className="grid grid-cols-[255px_1fr] h-[calc(100vh-56px)] duration-300 ease-in-out"
+          className="grid grid-cols-[255px_1fr] h-[calc(100vh-65px)] duration-300 ease-in-out"
         >
-          <div className="w-full">
+          <div className="w-full overflow-auto">
             <ListMenu />
           </div>
           <div className="h-full w-full bg-white border-l-2 border-gray-200 relative z-10 p-5 overflow-auto dark:bg-black dark:shadow-white dark:shadow-lg dark:border-white">
