@@ -1,13 +1,14 @@
 'use client'
 
 import { Textarea } from '@/components/ui/textarea'
-import { useNetwork } from '@msa_cli/react-composable'
+import { useFetch, useNetwork } from '@msa_cli/react-composable'
 
 export default function NetworkStatus() {
   const network = useNetwork()
-
+  const { data } = useFetch('/api/data', {}, { immediate: false })
   return (
     <div>
+      {JSON.stringify(data)}
       <p className="text-sm">Online: {network.isOnline ? 'Yes' : 'No'}</p>
       <p className="text-sm">Connection Type: {network.type}</p>
       <p className="text-sm">Network Speed: {network.effectiveType}</p>

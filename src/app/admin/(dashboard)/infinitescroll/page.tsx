@@ -1,7 +1,6 @@
 'use client'
 
 import ArrayMap from '@/components/ArrayMap'
-import { Button } from '@/components/ui/button'
 import { useInfiniteScroll } from '@msa_cli/react-composable'
 import { useRef, useState } from 'react'
 
