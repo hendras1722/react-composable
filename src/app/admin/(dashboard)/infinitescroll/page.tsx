@@ -46,7 +46,7 @@ export default function MyComponent() {
 
 import ArrayMap from '@/components/ArrayMap'
 import { Button } from '@/components/ui/button'
-import { useInfiniteScroll } from '@/composable/useInfiniteScroll'
+import { useInfiniteScroll } from from '@msa_cli/react-composable'
 import { useRef, useState } from 'react'
 
 export default function MyComponent() {

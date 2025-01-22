@@ -14,7 +14,7 @@ export interface Jsonplaceholder {
 
 export default function FetchData() {
   const { data, error, execute, isFetching, refetch } = useFetch<string>(
-    '/js-holder/todos',
+    '/js-holder/todos/1',
     {
       headers: {
         'Content-Type': 'application/json',
@@ -25,10 +25,6 @@ export default function FetchData() {
     {
       responseType: 'json',
       method: 'GET',
-      params: {
-        id: 'wewe',
-        name: 'wewew',
-      },
       onFetchError: async (ctx) => {
         // Custom error handling
         console.error('API Error:', ctx.error)
@@ -38,6 +34,7 @@ export default function FetchData() {
       },
     }
   )
+  console.log(data)
   if (error) {
     throw new Error(error)
   }

@@ -1,6 +1,5 @@
 'use client'
-import { useIdle } from '@/composable/useIdle'
-import { useTimestamp } from '@/composable/useTimestamp'
+import { useIdle, useTimestamp } from '@msa_cli/react-composable'
 
 export default function FormPage() {
   const { idle, lastActive } = useIdle(5000) // 5 seconds
@@ -19,8 +18,7 @@ export default function FormPage() {
       <pre className="bg-gray-100 rounded-lg overflow-auto h-96 mt-3  p-3">
         <code className="text-black">{`
 'use client'
-import { useIdle } from '@/composable/useIdle'
-import { useTimestamp } from '@/composable/useTimestamp'
+import { useIdle, useTimestamp } from '@msa_cli/react-composable'
 
 export default function FormPage() {
   const { idle, lastActive } = useIdle(5000) // 5 seconds

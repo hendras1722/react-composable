@@ -5,6 +5,7 @@ import MenuSidebar from '../MenuSidebar'
 import {
   FaArrowDownWideShort,
   FaCalendarDays,
+  FaChild,
   FaClipboard,
   FaClock,
   FaCodePullRequest,
@@ -88,6 +89,16 @@ export default function ListMenu() {
       name: 'infinite scroll',
       href: '/admin/infinitescroll',
       icon: () => <FaArrowDownWideShort />,
+    },
+    {
+      name: 'timestamp',
+      href: '/admin/timestamp',
+      icon: () => <FaClock />,
+    },
+    {
+      name: 'idle',
+      href: '/admin/idle',
+      icon: () => <FaChild />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />

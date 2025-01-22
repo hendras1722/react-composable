@@ -47,7 +47,7 @@ export default function StateHistory() {
         <code className="text-black">{`
 'use client'
 import { Button } from '@/components/ui/button'
-import { useRefHistory } from '@/composable/useStateHistory'
+import { useRefHistory } from from '@msa_cli/react-composable'
 
 export default function StateHistory() {
   // We'll use local state to track the current value

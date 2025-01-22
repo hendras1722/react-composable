@@ -27,7 +27,7 @@ export default function BeforeRouteLeave() {
 'use client'
 
 import { useBeforeRouteLeave } from '@/composable/onBeforeLeave'
-import { useIdle } from '@/composable/useIdle'
+import { useIdle } from from '@msa_cli/react-composable'
 import { useState } from 'react'
 
 export default function FormPage() {

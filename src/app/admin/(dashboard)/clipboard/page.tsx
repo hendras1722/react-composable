@@ -36,7 +36,7 @@ export default function Clipboard() {
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import useClipboard from '@/composable/useClipboard'
+import useClipboard from '@msa_cli/react-composable'
 import { useState } from 'react'
 
 export default function Clipboard() {
