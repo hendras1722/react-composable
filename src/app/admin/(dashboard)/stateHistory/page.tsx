@@ -43,7 +43,7 @@ export default function StateHistory() {
           Redo
         </Button>
       </div>
-      <pre className="bg-gray-300 rounded-lg overflow-auto h-96 mt-3  p-3">
+      <pre className="bg-gray-100 rounded-lg overflow-auto h-96 mt-3  p-3">
         <code className="text-black">{`
 'use client'
 import { Button } from '@/components/ui/button'

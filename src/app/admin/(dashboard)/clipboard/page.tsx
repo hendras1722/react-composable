@@ -30,7 +30,7 @@ export default function Clipboard() {
         {text}
       </div>
       <div className="mt-5">How to use:</div>
-      <pre className="bg-gray-300 rounded-lg overflow-auto h-96 mt-3  p-3">
+      <pre className="bg-gray-100 rounded-lg overflow-auto h-96 mt-3  p-3">
         <code className="text-black">{`
 'use client'
 

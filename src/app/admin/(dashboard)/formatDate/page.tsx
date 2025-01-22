@@ -18,7 +18,7 @@ export default function FormatDate() {
       <p>Relative: {relativeTime}</p>
 
       <div className="mt-5">How to use:</div>
-      <pre className="bg-gray-300 rounded-lg overflow-auto h-96 mt-3  p-3">
+      <pre className="bg-gray-100 rounded-lg overflow-auto h-96 mt-3  p-3">
         <code className="text-black">{`
 import { useDateFormat, useRelativeDate } from '@msa_cli/react-composable'
 import { id } from 'date-fns/locale'

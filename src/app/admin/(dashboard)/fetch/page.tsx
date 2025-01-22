@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { useFetch } from '@msa_cli/react-composable'
+import { useEffect } from 'react'
 import { FaSpinner } from 'react-icons/fa6'
 
 export interface Jsonplaceholder {
@@ -12,14 +13,38 @@ export interface Jsonplaceholder {
 }
 
 export default function FetchData() {
-  // Basic JSON GET request
-  const { data, error, isFetching, refetch } = useFetch<Jsonplaceholder[]>(
-    '/js-holder/todos/1',
-    {},
+  const { data, error, execute, isFetching, refetch } = useFetch<string>(
+    '/js-holder/todos',
     {
-      immediate: false, // for mounted when immediete true
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      keepalive: true,
+      redirect: 'follow',
+    },
+    {
+      responseType: 'json',
+      method: 'GET',
+      params: {
+        id: 'wewe',
+        name: 'wewew',
+      },
+      onFetchError: async (ctx) => {
+        // Custom error handling
+        console.error('API Error:', ctx.error)
+        return {
+          error: 'Something went wrong! Please try again.',
+        }
+      },
     }
   )
+  if (error) {
+    throw new Error(error)
+  }
+
+  useEffect(() => {
+    execute()
+  }, [])
 
   // POST request with JSON payload
   // const { data, execute } = useFetch<User>(
@@ -72,7 +97,7 @@ export default function FetchData() {
       <div>{error && 'Error Fetching'}</div>
       <div>{data && JSON.stringify(data, null, 2)}</div>
       <div className="mt-5">How to use:</div>
-      <pre className="bg-gray-300 rounded-lg overflow-auto h-96 mt-3  p-3">
+      <pre className="bg-gray-100 rounded-lg overflow-auto h-96 mt-3  p-3">
         <code className="text-black">{`
 'use client'
 
@@ -89,13 +114,38 @@ export interface Jsonplaceholder {
 
 export default function FetchData() {
   // Basic JSON GET request
-  const { data, error, isFetching, refetch } = useFetch<Jsonplaceholder[]>(
-    '/js-holder/todos/1',
-    {},
+  const { data, error, execute, isFetching, refetch } = useFetch<string>(
+    '/js-holder/todos',
     {
-      immediate: false, // for mounted when immediete true
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      keepalive: true,
+      redirect: 'follow',
+    },
+    {
+      responseType: 'json',
+      method: 'GET',
+      params: {
+        id: 'wewe',
+        name: 'wewew',
+      },
+      onFetchError: async (ctx) => {
+        // Custom error handling
+        console.error('API Error:', ctx.error)
+        return {
+          error: 'Something went wrong! Please try again.',
+        }
+      },
     }
   )
+  if (error) {
+    throw new Error(error)
+  }
+
+  useEffect(() => {
+    execute()
+  }, [])
 
   // POST request with JSON payload
   // const { data, execute } = useFetch<User>(
@@ -136,6 +186,10 @@ export default function FetchData() {
   //     },
   //   }
   // )
+
+  useEffect(() => {
+    execute()
+  }, [])
   return (
     <div>
       <div className="mb-5 flex gap-3 items-center">
