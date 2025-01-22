@@ -1,6 +1,6 @@
 'use client'
 
-import { useTimestamp } from from '@msa_cli/react-composable'
+import { useTimestamp } from '@msa_cli/react-composable'
 
 export default function Timestamp() {
   const timestamp = useTimestamp()
