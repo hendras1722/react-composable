@@ -1,11 +1,29 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { useClipboard } from '@msa_cli/react-composable'
+import { useClipboard, useFetch } from '@msa_cli/react-composable'
+import { notFound } from 'next/navigation'
+import { useEffect } from 'react'
+// import { notFound } from 'next/navigation'
+// import { useEffect } from 'react'
 import { FaCopy } from 'react-icons/fa6'
 
 export default function Dashboard() {
   const { copy, copied } = useClipboard()
+  const { execute, statusCode } = useFetch(
+    '/api/data',
+    {},
+    {
+      immediate: false,
+    }
+  )
+  useEffect(() => {
+    execute()
+    if (statusCode === 404) {
+      notFound()
+    }
+  }, [statusCode])
+
   return (
     <div className="dark:text-white">
       <h4 className="font-bold mb-3">
