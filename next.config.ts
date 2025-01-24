@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
     // ]
   },
   images: {
-    domains: ['lh3.googleusercontent.com'],
+    domains: ['lh3.googleusercontent.com', 'localhost:3000'],
   },
   async redirects() {
     return [
@@ -44,19 +44,19 @@ const nextConfig: NextConfig = {
   },
   poweredByHeader: false,
   headers: async () => [
-    {
-      source: '/:path*',
-      headers: [
-        {
-          key: 'Referrer-Policy',
-          value: 'strict-origin-when-cross-origin',
-        },
-        {
-          key: 'Permissions-Policy',
-          value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
-        },
-      ],
-    },
+    // {
+    //   source: '/:path*',
+    //   headers: [
+    //     {
+    //       key: 'Referrer-Policy',
+    //       value: 'strict-origin-when-cross-origin',
+    //     },
+    //     {
+    //       key: 'Permissions-Policy',
+    //       value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+    //     },
+    //   ],
+    // },
   ],
 }
 

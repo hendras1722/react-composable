@@ -34,7 +34,7 @@ export default function FetchData() {
       },
     }
   )
-  console.log(data)
+
   if (error) {
     throw new Error(error)
   }

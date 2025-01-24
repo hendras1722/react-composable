@@ -156,3 +156,11 @@ details > summary::-webkit-details-marker {
 details[open] > *:not(summary) {
   animation: details-show 150ms ease-in-out;
 }
+
+i {
+  @apply text-2xl opacity-50 m-auto;
+}
+
+.title {
+  @apply opacity-50 uppercase tracking-wide text-sm;
+}

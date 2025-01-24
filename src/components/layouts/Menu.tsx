@@ -4,11 +4,14 @@ import { useRoute } from '@/composable/useRoute'
 import MenuSidebar from '../MenuSidebar'
 import {
   FaArrowDownWideShort,
+  FaArrowsToCircle,
   FaCalendarDays,
+  FaCamera,
   FaChild,
   FaClipboard,
   FaClock,
   FaCodePullRequest,
+  FaComputer,
   FaComputerMouse,
   FaDatabase,
   FaDownLeftAndUpRightToCenter,
@@ -17,7 +20,6 @@ import {
   FaNetworkWired,
   FaRegBuilding,
   FaScroll,
-  FaTable,
   FaTarpDroplet,
 } from 'react-icons/fa6'
 
@@ -99,6 +101,21 @@ export default function ListMenu() {
       name: 'idle',
       href: '/admin/idle',
       icon: () => <FaChild />,
+    },
+    {
+      name: 'Camera',
+      href: '/admin/camera',
+      icon: () => <FaCamera />,
+    },
+    {
+      name: 'Device list',
+      href: '/admin/devicelist',
+      icon: () => <FaComputer />,
+    },
+    {
+      name: 'Permission',
+      href: '/admin/permission',
+      icon: () => <FaArrowsToCircle />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />
