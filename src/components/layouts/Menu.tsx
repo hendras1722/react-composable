@@ -102,11 +102,11 @@ export default function ListMenu() {
       href: '/admin/idle',
       icon: () => <FaChild />,
     },
-    {
-      name: 'Camera',
-      href: '/admin/camera',
-      icon: () => <FaCamera />,
-    },
+    // {
+    //   name: 'Camera',
+    //   href: '/admin/camera',
+    //   icon: () => <FaCamera />,
+    // },
     {
       name: 'Device list',
       href: '/admin/devicelist',
