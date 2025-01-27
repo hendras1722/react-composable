@@ -1,203 +1,123 @@
 'use client'
 
-import React, { useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import { Textarea } from '@/components/ui/textarea'
-import { useElementBounding, useCamera } from '@msa_cli/react-composable'
-import { cn } from '@/utils/lib'
+import React from 'react'
+import Camera from './useCamera'
 
-export default function CameraComponent() {
-  const [constraints, setConstraints] = React.useState({
-    video: {
-      width: { ideal: 275 },
-      height: { ideal: 567 },
-    },
-  })
-  const { start, stop, switchCamera, picture, takeSnapshot, loadingVideos } =
-    useCamera(constraints)
-  const videoRef = React.useRef<HTMLVideoElement>(null)
-  const { width, height } = useElementBounding(
-    videoRef as React.RefObject<HTMLElement>
-  )
-
-  useEffect(() => {
-    setConstraints({
-      video: {
-        width: { ideal: 275 },
-        height: { ideal: 567 },
-      },
-    })
-  }, [width, height])
-
-  useEffect(() => {
-    start()
-    return () => stop()
-  }, [])
+const CameraPage: React.FC = () => {
+  const {
+    videoRef,
+    error,
+    startCamera,
+    stream,
+    stopCamera,
+    setIsFrontCamera,
+    deviceId,
+    setDeviceId,
+    devices,
+    takeSnapshot,
+    canvasRef,
+    snapshotBlob,
+  } = Camera()
 
   return (
-    <div>
-      <div>Default constraints</div>
-      <Textarea
-        onChange={() => {}}
-        className="mb-5"
-        rows={15}
-        value={JSON.stringify(
-          {
-            audio: false,
-            video: {
-              width: { ideal: 640 },
-              height: { ideal: 480 },
-              facingMode: 'user',
-              frameRate: { ideal: 30 },
-            },
-          },
-          null,
-          2
-        )}
-      />
-      {loadingVideos && <p>Loading camera...</p>}
-      <div className={cn('relative', `min-w-${width}px] min-h-[${height}px]`)}>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Camera Control Page</h1>
+
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
+
+      <div className="mb-4">
         <video
           ref={videoRef}
-          id="video"
-          width="0"
-          height="0"
-          style={{ width: '50%', height: '50%', border: '1px solid black' }}
-        ></video>
-        {/* set frame as background customized width only. don't change height,customize width with tag video */}
-        <div className="absolute w-full h-full z-10 top-0 ">
-          <Image
-            src="/frame.png"
-            width={0}
-            height={0}
-            alt="frame"
-            className="w-2/4 h-full"
+          autoPlay
+          playsInline
+          muted
+          style={{
+            width: '100%',
+            maxHeight: '480px',
+            backgroundColor: 'black',
+            borderRadius: '8px',
+          }}
+        />
+      </div>
+
+      <div className="space-x-2 mb-4">
+        <button
+          onClick={startCamera}
+          disabled={!!stream}
+          className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+        >
+          Start Camera
+        </button>
+        <button
+          onClick={stopCamera}
+          disabled={!stream}
+          className="px-4 py-2 bg-red-500 text-white rounded disabled:bg-gray-300"
+        >
+          Stop Camera
+        </button>
+        <button
+          onClick={() => {
+            setIsFrontCamera((prev) => !prev)
+            stopCamera()
+            setTimeout(startCamera, 500)
+          }}
+          disabled={!stream}
+          className="px-4 py-2 bg-green-500 text-white rounded disabled:bg-gray-300"
+        >
+          Switch Camera
+        </button>
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="deviceSelect" className="mr-2">
+          Select Camera:
+        </label>
+        <select
+          id="deviceSelect"
+          value={deviceId ?? ''}
+          onChange={(e) => {
+            setDeviceId(e.target.value)
+            stopCamera()
+            setTimeout(startCamera, 500)
+          }}
+          disabled={!devices.length || !stream}
+          className="px-2 py-1 border rounded"
+        >
+          {devices.map((device) => (
+            <option key={device.deviceId} value={device.deviceId}>
+              {device.label || 'Unknown Camera'}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mb-4">
+        <button
+          onClick={takeSnapshot}
+          disabled={!stream}
+          className="px-4 py-2 bg-purple-500 text-white rounded disabled:bg-gray-300"
+        >
+          Take Snapshot
+        </button>
+        <canvas ref={canvasRef} style={{ display: 'none' }} />
+      </div>
+
+      {snapshotBlob && (
+        <div>
+          <h3 className="text-xl font-semibold mb-2">Snapshot Preview:</h3>
+          <img
+            src={URL.createObjectURL(snapshotBlob)}
+            alt="Snapshot"
+            className="max-w-full rounded"
           />
         </div>
-      </div>
-
-      {picture && (
-        <Image
-          src={picture ?? ''}
-          alt="wewe"
-          width={0}
-          height={0}
-          className="w-auto h-auto"
-        />
       )}
-      <div className="flex gap-3 mt-5 flex-wrap">
-        <Button onClick={() => switchCamera('user')}>Front Camera</Button>
-        <Button onClick={() => switchCamera('environment')}>Back Camera</Button>
-        <Button onClick={() => stop()}>Stop</Button>
-        <Button onClick={() => start()}>Start</Button>
-        <Button onClick={() => takeSnapshot()}>takeSnapshot</Button>
-      </div>
-
-      <div className="mt-5">How to use:</div>
-      <pre className="bg-gray-100 rounded-lg overflow-auto h-96 mt-3  p-3">
-        <code className="text-black">{`
-'use client'
-
-import React, { useEffect } from 'react'
-import useCamera from '@/composable/useCamera'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import { Textarea } from '@/components/ui/textarea'
-import { useElementBounding } from '@msa_cli/react-composable'
-import { cn } from '@/utils/lib'
-
-export default function CameraComponent() {
-  const [constraints, setConstraints] = React.useState({
-    video: {
-      width: { ideal: 275 },
-      height: { ideal: 567 },
-    },
-  })
-  const { start, stop, switchCamera, picture, takeSnapshot, loadingVideos } =
-    useCamera(constraints)
-  const videoRef = React.useRef<HTMLVideoElement>(null)
-  const { width, height } = useElementBounding(
-    videoRef as React.RefObject<HTMLElement>
-  )
-
-  useEffect(() => {
-    setConstraints({
-      video: {
-        width: { ideal: 275 },
-        height: { ideal: 567 },
-      },
-    })
-  }, [width, height])
-
-  useEffect(() => {
-    start()
-    return () => stop()
-  }, [])
-
-  return (
-    <div>
-      <div>Default constraints</div>
-      <Textarea
-        onChange={() => {}}
-        className="mb-5"
-        rows={15}
-        value={JSON.stringify(
-          {
-            audio: false,
-            video: {
-              width: { ideal: 640 },
-              height: { ideal: 480 },
-              facingMode: 'user',
-              frameRate: { ideal: 30 },
-            },
-          },
-          null,
-          2
-        )}
-      />
-      {loadingVideos && <p>Loading camera...</p>}
-      <div className={cn('relative', 'min-w-[${width}px] min-h-[${height}px]'}>
-        <video
-          ref={videoRef}
-          id="video"
-          width="0"
-          height="0"
-          style={{ width: '50%', height: '50%', border: '1px solid black' }}
-        ></video>
-        {/* set frame as background customized width only. don't change height,customize width with tag video */}
-        <div className="absolute w-full h-full z-10 top-0 ">
-          <Image
-            src="/frame.png"
-            width={0}
-            height={0}
-            alt="frame"
-            className="w-2/4 h-full"
-          />
-        </div>
-      </div>
-
-      {picture && (
-        <Image
-          src={picture ?? ''}
-          alt="wewe"
-          width={0}
-          height={0}
-          className="w-auto h-auto"
-        />
-      )}
-      <div className="flex gap-3 mt-5 flex-wrap">
-        <Button onClick={() => switchCamera('user')}>Front Camera</Button>
-        <Button onClick={() => switchCamera('environment')}>Back Camera</Button>
-        <Button onClick={() => stop()}>Stop</Button>
-        <Button onClick={() => start()}>Start</Button>
-        <Button onClick={() => takeSnapshot()}>takeSnapshot</Button>
-      </div>
     </div>
   )
 }
-      `}</code>
-      </pre>
-    </div>
-  )
-}
+
+export default CameraPage
