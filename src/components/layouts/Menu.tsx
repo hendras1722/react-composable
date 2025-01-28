@@ -5,6 +5,7 @@ import MenuSidebar from '../MenuSidebar'
 import {
   FaArrowDownWideShort,
   FaArrowsToCircle,
+  FaArrowsUpDown,
   FaCalendarDays,
   FaCamera,
   FaChild,
@@ -102,11 +103,11 @@ export default function ListMenu() {
       href: '/admin/idle',
       icon: () => <FaChild />,
     },
-    // {
-    //   name: 'Camera',
-    //   href: '/admin/camera',
-    //   icon: () => <FaCamera />,
-    // },
+    {
+      name: 'Camera',
+      href: '/admin/camera',
+      icon: () => <FaCamera />,
+    },
     {
       name: 'Device list',
       href: '/admin/devicelist',
@@ -116,6 +117,11 @@ export default function ListMenu() {
       name: 'Permission',
       href: '/admin/permission',
       icon: () => <FaArrowsToCircle />,
+    },
+    {
+      name: 'UseInteractiveObserver',
+      href: '/admin/interactive',
+      icon: () => <FaArrowsUpDown />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />

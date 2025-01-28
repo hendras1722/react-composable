@@ -59,7 +59,7 @@ function DeviceSelector() {
 import { Button } from '@/components/ui/button'
 import useDevicesList, {
   type UseDevicesListResult,
-} from '@/composable/useDevicelist'
+} from '@msa_cli/react-composable'
 import { FaCamera, FaHeadphones, FaMicrophone } from 'react-icons/fa6'
 
 export default function DeviceSelector() {

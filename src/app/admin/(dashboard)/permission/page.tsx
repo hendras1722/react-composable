@@ -47,7 +47,7 @@ export default function PermissionExample() {
         <code className="text-black">{`
 'use client'
 
-import usePermission from '@/composable/usePermission'
+import usePermission from '@msa_cli/react-composable'
 
 export default function PermissionExample() {
   // Simple usage
