@@ -18,6 +18,7 @@ import {
   FaDownLeftAndUpRightToCenter,
   FaFile,
   FaHouse,
+  FaJetFighterUp,
   FaNetworkWired,
   FaRegBuilding,
   FaScroll,
@@ -122,6 +123,16 @@ export default function ListMenu() {
       name: 'UseInteractiveObserver',
       href: '/admin/interactive',
       icon: () => <FaArrowsUpDown />,
+    },
+    {
+      name: 'Out Click Outside',
+      href: '/admin/outclickoutside',
+      icon: () => <FaJetFighterUp />,
+    },
+    {
+      name: 'Mouse in Element',
+      href: '/admin/mouseinelement',
+      icon: () => <FaComputerMouse />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />
