@@ -6,20 +6,23 @@ import {
   FaArrowDownWideShort,
   FaArrowsToCircle,
   FaArrowsUpDown,
+  FaBahai,
   FaCalendarDays,
   FaCamera,
   FaChild,
   FaClipboard,
   FaClock,
+  FaCmplid,
   FaCodePullRequest,
   FaComputer,
   FaComputerMouse,
   FaDatabase,
   FaDownLeftAndUpRightToCenter,
   FaFile,
-  FaHouse,
+  FaImage,
   FaJetFighterUp,
   FaNetworkWired,
+  FaPlaneDeparture,
   FaRegBuilding,
   FaScroll,
   FaTarpDroplet,
@@ -28,7 +31,11 @@ import {
 export default function ListMenu() {
   const route = useRoute()
   const menu = [
-    { name: 'Dashboard', href: '/admin/dashboard', icon: () => <FaHouse /> },
+    {
+      name: 'Getting Started',
+      href: '/admin/dashboard',
+      icon: () => <FaPlaneDeparture />,
+    },
     {
       name: 'Draggable',
       href: '/admin/draggable',
@@ -130,9 +137,29 @@ export default function ListMenu() {
       icon: () => <FaJetFighterUp />,
     },
     {
+      name: 'Mouse basic usage',
+      href: '/admin/mouse',
+      icon: () => <FaComputerMouse />,
+    },
+    {
       name: 'Mouse in Element',
       href: '/admin/mouseinelement',
       icon: () => <FaComputerMouse />,
+    },
+    {
+      name: 'Animate',
+      href: '/admin/Animate',
+      icon: () => <FaBahai />,
+    },
+    {
+      name: 'Object url',
+      href: '/admin/objecturl',
+      icon: () => <FaCmplid />,
+    },
+    {
+      name: 'Image',
+      href: '/admin/image',
+      icon: () => <FaImage />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />

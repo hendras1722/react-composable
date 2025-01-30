@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { FaAlignJustify } from 'react-icons/fa6'
+import { version } from '../../package.json'
 
 export default function HideSidebarButton() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
@@ -31,8 +32,11 @@ export default function HideSidebarButton() {
   }
 
   return (
-    <button onClick={hideSidebar} className="p-2 bg-gray-200 rounded">
-      <FaAlignJustify />
-    </button>
+    <div className="flex gap-3 items-center">
+      <button onClick={hideSidebar} className="p-2 bg-gray-200 rounded">
+        <FaAlignJustify />
+      </button>
+      <span className="font-bold">v{version}</span>
+    </div>
   )
 }
