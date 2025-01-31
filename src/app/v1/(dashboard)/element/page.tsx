@@ -17,6 +17,8 @@ export default function Element() {
         rows={8}
         ref={textarea}
         value={obj}
+        onChange={() => {}}
+        readOnly
       />
       <div className="mt-5">How to use:</div>
       <pre className="bg-gray-100 rounded-lg overflow-auto h-96 mt-3  p-3">

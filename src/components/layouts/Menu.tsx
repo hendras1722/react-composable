@@ -4,7 +4,9 @@ import { useRoute } from '@/composable/useRoute'
 import MenuSidebar from '../MenuSidebar'
 import {
   FaArrowDownWideShort,
+  FaArrowsLeftRight,
   FaArrowsToCircle,
+  FaArrowsToEye,
   FaArrowsUpDown,
   FaBahai,
   FaCalendarDays,
@@ -14,17 +16,20 @@ import {
   FaClock,
   FaCmplid,
   FaCodePullRequest,
+  FaCompress,
   FaComputer,
   FaComputerMouse,
   FaDatabase,
   FaDownLeftAndUpRightToCenter,
   FaFile,
+  FaICursor,
   FaImage,
   FaJetFighterUp,
   FaNetworkWired,
   FaPlaneDeparture,
   FaRegBuilding,
   FaScroll,
+  FaTableList,
   FaTarpDroplet,
 } from 'react-icons/fa6'
 
@@ -160,6 +165,31 @@ export default function ListMenu() {
       name: 'Image',
       href: '/v1/image',
       icon: () => <FaImage />,
+    },
+    {
+      name: 'cyclelist',
+      href: '/v1/cyclelist',
+      icon: () => <FaArrowsLeftRight />,
+    },
+    {
+      name: 'documentvisibilty',
+      href: '/v1/documentvisibilty',
+      icon: () => <FaArrowsToEye />,
+    },
+    {
+      name: 'fullscreen',
+      href: '/v1/fullscreen',
+      icon: () => <FaCompress />,
+    },
+    {
+      name: 'textselection',
+      href: '/v1/textselection',
+      icon: () => <FaICursor />,
+    },
+    {
+      name: 'virtuallist',
+      href: '/v1/virtuallist',
+      icon: () => <FaTableList />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />
