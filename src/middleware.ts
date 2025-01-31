@@ -81,7 +81,7 @@ export async function middleware(request: NextRequest) {
 
   // if (token && isLoginPage) {
   //   const redirectUrl = new URL(request.url).searchParams.get('redirect')
-  //   const targetUrl = redirectUrl ?? '/admin/dashboard'
+  //   const targetUrl = redirectUrl ?? '/v1/dashboard'
   //   return NextResponse.redirect(new URL(targetUrl, request.url))
   // }
 
@@ -93,7 +93,7 @@ export async function middleware(request: NextRequest) {
 // Matcher configuration
 export const config = {
   matcher: [
-    '/admin/:path*',
+    '/v1/:path*',
     '/login',
     '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
