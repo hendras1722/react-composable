@@ -5,7 +5,7 @@ import { useFullscreen } from '@msa_cli/react-composable'
 import { useRef } from 'react'
 
 export default function MyComponent() {
-  const elementRef = useRef<HTMLDivElement>(null)
+  const elementRef = useRef<HTMLVideoElement>(null)
   const { isFullscreen, toggle, isSupported } = useFullscreen(
     elementRef.current
   )
