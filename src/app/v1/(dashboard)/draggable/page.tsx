@@ -28,6 +28,7 @@ export default function MyDraggableComponent() {
     y = 10,
     isDragging,
   } = useDraggable(elementRef as React.RefObject<HTMLElement>, {
+    initialPosition: { x: Math.random() * 120, y: Math.random() * 120 }, // Optional initial position
     boundaries: {
       minX: 10,
       maxX: width - 117,
@@ -97,6 +98,7 @@ export default function MyDraggableComponent() {
     y = 10,
     isDragging,
   } = useDraggable(elementRef as React.RefObject<HTMLElement>, {
+    initialPosition: { x: 10, y: 10 }, // Optional initial position
     boundaries: {
       minX: 10,
       maxX: width - 117,
