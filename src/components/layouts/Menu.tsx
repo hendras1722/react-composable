@@ -22,6 +22,7 @@ import {
   FaDatabase,
   FaDownLeftAndUpRightToCenter,
   FaFile,
+  FaH,
   FaICursor,
   FaImage,
   FaJetFighterUp,
@@ -190,6 +191,11 @@ export default function ListMenu() {
       name: 'virtuallist',
       href: '/v1/virtuallist',
       icon: () => <FaTableList />,
+    },
+    {
+      name: 'Case Text Changes',
+      href: '/v1/casetextchanges',
+      icon: () => <FaH />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />
