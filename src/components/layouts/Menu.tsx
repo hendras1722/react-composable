@@ -23,6 +23,7 @@ import {
   FaDownLeftAndUpRightToCenter,
   FaFile,
   FaH,
+  FaHouseLaptop,
   FaICursor,
   FaImage,
   FaJetFighterUp,
@@ -196,6 +197,11 @@ export default function ListMenu() {
       name: 'Case Text Changes',
       href: '/v1/casetextchanges',
       icon: () => <FaH />,
+    },
+    {
+      name: 'Display media',
+      href: '/v1/displaymedia',
+      icon: () => <FaHouseLaptop />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />

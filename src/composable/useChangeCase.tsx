@@ -1,25 +1,22 @@
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 
-type ChangeCaseType =
-  | 'camelCase'
-  | 'capitalCase'
-  | 'constantCase'
-  | 'dotCase'
-  | 'kebabCase'
-  | 'noCase'
-  | 'pascalCase'
-  | 'pascalSnakeCase'
-  | 'pathCase'
-  | 'sentenceCase'
-  | 'snakeCase'
-  | 'trainCase'
-
+// Define the case transformers directly since we're not using change-case library
 const caseTransformers = {
   camelCase: (str: string): string => {
-    // Preserve spaces but make first letter lowercase and capitalize first letter after each space
-    return str
-      .replace(/^([A-Z])/, (match) => match.toLowerCase()) // First letter lowercase
-      .replace(/\s+([a-z])/g, (match, char) => ' ' + char) // Keep spaces and don't change case
+    // Split by spaces and other non-alphanumeric characters
+    const words = str.split(/[^a-zA-Z0-9]+/)
+
+    // Make first word lowercase, capitalize others
+    return words
+      .map((word, index) => {
+        if (index === 0) {
+          // First word should be lowercase
+          return word.toLowerCase()
+        }
+        // Other words should have first letter capitalized
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      })
+      .join('')
   },
   capitalCase: (str: string): string => {
     return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase())
@@ -37,13 +34,18 @@ const caseTransformers = {
     return str.toLowerCase().replace(/[^a-zA-Z0-9]+/g, ' ')
   },
   pascalCase: (str: string): string => {
-    // Just capitalize the first letter of each word, preserving spaces
-    return str.replace(/\b\w/g, (char) => char.toUpperCase())
+    // Split by spaces and other non-alphanumeric characters
+    const words = str.split(/[^a-zA-Z0-9]+/)
+
+    // Capitalize first letter of each word
+    return words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join('')
   },
   pascalSnakeCase: (str: string): string => {
     return str
       .split(/[^a-zA-Z0-9]+/)
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join('_')
   },
   pathCase: (str: string): string => {
@@ -56,36 +58,55 @@ const caseTransformers = {
     return str.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '_')
   },
   trainCase: (str: string): string => {
-    // First normalize the string by adding spaces between camelCase/PascalCase words
-    const normalized = str
-      // Add space before uppercase letters that follow lowercase letters
-      .replace(/([a-z])([A-Z])/g, '$1 $2')
-      // Handle consecutive capitals (e.g., "HTML")
-      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
-      .trim()
-
-    // Then apply train-case transformation
-    return (
-      normalized
-        .toLowerCase()
-        // Replace any non-alphanumeric characters with hyphens
-        .replace(/[^a-zA-Z0-9]+/g, '-')
-        // Capitalize first letter of each word
-        .replace(
-          /(^|-)([a-z])/g,
-          (_, separator, char) => separator + char.toUpperCase()
-        )
-    )
+    return str
+      .toLowerCase()
+      .replace(/[^a-zA-Z0-9]+/g, '-')
+      .replace(
+        /(^|-)([a-z])/g,
+        (_, separator, char) => separator + char.toUpperCase()
+      )
   },
 }
 
-const useChangeCase = (
-  initialInput: string,
-  type: ChangeCaseType
-): [string, (value: string) => void] => {
-  const [input, setInput] = useState(initialInput)
-  const transformedValue = caseTransformers[type](input)
-  return [transformedValue, setInput]
+// Create the type from the keys of our transformer object
+type ChangeCaseType = keyof typeof caseTransformers
+
+// Options interface
+interface Options {
+  [key: string]: any
 }
 
-export { useChangeCase }
+/**
+ * React hook for transforming strings using various case transformations
+ * @param initialInput The initial string input
+ * @param type The case transformation type to apply
+ * @param options Optional configuration for the transformation
+ * @returns [transformedValue, setValue] - The transformed string and a function to update the input
+ */
+function useChangeCase(
+  initialInput: string,
+  type: ChangeCaseType,
+  options?: Options
+): [string, (value: string) => void] {
+  // Validate the transformation type
+  if (!caseTransformers[type]) {
+    throw new Error(`Invalid change case type "${type}"`)
+  }
+
+  // State to hold the input value
+  const [input, setInput] = useState(initialInput)
+
+  // Memoize the transformed value to avoid unnecessary recalculations
+  const transformedValue = useMemo(() => {
+    return caseTransformers[type](input)
+  }, [input, type, options])
+
+  // Create a stable function reference to update the input
+  const setValue = useCallback((value: string) => {
+    setInput(value)
+  }, [])
+
+  return [transformedValue, setValue]
+}
+
+export { useChangeCase, caseTransformers, type ChangeCaseType }

@@ -7,19 +7,19 @@ const nextConfig: NextConfig = {
       afterFiles: [
         {
           source: '/js-holder/:path*',
-          destination: 'https://jsonplaceholder.typicode.com/:path*',
+          destination: 'https://postman-echo.com/:path*',
         },
       ],
       beforeFiles: [
         {
           source: '/js-holder/:path*',
-          destination: 'https://jsonplaceholder.typicode.com/:path*',
+          destination: 'https://postman-echo.com/:path*',
         },
       ],
       fallback: [
         {
           source: '/js-holder/:path*',
-          destination: 'https://jsonplaceholder.typicode.com/:path*',
+          destination: 'https://postman-echo.com/:path*',
         },
       ],
     }

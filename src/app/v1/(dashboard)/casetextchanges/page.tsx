@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import { useChangeCase } from '@msa_cli/react-composable'
 import { cn } from '@/utils/lib'
+import { useChangeCase } from '@/composable/useChangeCase'
 
 type ChangeCaseType =
   | 'camelCase'
