@@ -1,7 +1,6 @@
 'use client'
 
 import { Textarea } from '@/components/ui/textarea'
-import useFetch from '@/composable/useFetch'
 import { useElementBounding } from '@msa_cli/react-composable'
 import { useRef } from 'react'
 
