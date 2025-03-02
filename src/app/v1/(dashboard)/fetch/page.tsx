@@ -15,7 +15,6 @@ export interface Jsonplaceholder {
   title: string
   completed: boolean
 }
-const fetcher = (url) => fetch(url).then((r) => r.json())
 export default function FetchData() {
   const { data, error, isLoading } = useFetch<User>(
     'https://jsonplaceholder.typicode.com/todos/1',
@@ -26,11 +25,7 @@ export default function FetchData() {
     }
   )
 
-  const {
-    data: DataPost,
-    isLoading: loadingPost,
-    mutate,
-  } = useFetch(
+  const { mutate } = useFetch(
     'https://jsonplaceholder.typicode.com/posts',
     {
       method: 'POST',
@@ -90,7 +85,6 @@ export interface Jsonplaceholder {
   title: string
   completed: boolean
 }
-const fetcher = (url) => fetch(url).then((r) => r.json())
 export default function FetchData() {
   const { data, error, isLoading } = useFetch<User>(
     'https://jsonplaceholder.typicode.com/todos/1',
