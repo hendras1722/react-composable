@@ -5,7 +5,7 @@ import { useFetch, useNetwork } from '@msa_cli/react-composable'
 
 export default function NetworkStatus() {
   const network = useNetwork()
-  const { data } = useFetch('/api/data', {}, { immediate: false })
+  const { data } = useFetch('/api/data', {})
   return (
     <div>
       {JSON.stringify(data)}
