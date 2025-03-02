@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { cn } from '@/utils/lib'
-import { useChangeCase } from '@/composable/useChangeCase'
+import { useChangeCase } from '@msa_cli/react-composable'
 
 type ChangeCaseType =
   | 'camelCase'
