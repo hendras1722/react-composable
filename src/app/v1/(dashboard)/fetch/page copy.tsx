@@ -10,19 +10,6 @@ import { FaCopy } from 'react-icons/fa6'
 
 export default function Dashboard() {
   const { copy, copied } = useClipboard()
-  const { execute, statusCode } = useFetch(
-    '/api/data',
-    {},
-    {
-      immediate: false,
-    }
-  )
-  useEffect(() => {
-    execute()
-    if (statusCode === 404) {
-      notFound()
-    }
-  }, [statusCode])
 
   return (
     <div className="dark:text-white">

@@ -12,12 +12,17 @@ export interface JSONDummy {
 }
 
 export default function VirtualListExample() {
-  const { data, isFetching, execute, error } = useFetch<JSONDummy[]>(
+  const {
+    data,
+    error,
+    isLoading: isFetching,
+    mutate: execute,
+  } = useFetch<JSONDummy[]>(
     'https://microsoftedge.github.io/Demos/json-dummy-data/1MB.json',
     {},
     {
-      method: 'GET',
-      responseType: 'json',
+      revalidateOnFocus: true,
+      errorRetryCount: 3,
     }
   )
   const longList = Array.from({ length: 100000 }, (_, i) => {
@@ -47,7 +52,7 @@ export default function VirtualListExample() {
     containerHeight: window.innerHeight - 500,
   })
 
-  if (isFetching) return <div>Loading...</div>
+  if (isFetching && !data) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>
 
   return (
@@ -85,12 +90,17 @@ export interface JSONDummy {
 }
 
 export default function VirtualListExample() {
-  const { data, isFetching, execute, error } = useFetch<JSONDummy[]>(
+   const {
+    data,
+    error,
+    isLoading: isFetching,
+    mutate: execute,
+  } = useFetch<JSONDummy[]>(
     'https://microsoftedge.github.io/Demos/json-dummy-data/1MB.json',
     {},
     {
-      method: 'GET',
-      responseType: 'json',
+      revalidateOnFocus: false,
+      errorRetryCount: 3,
     }
   )
   const longList = Array.from({ length: 100000 }, (_, i) => {
@@ -117,7 +127,7 @@ export default function VirtualListExample() {
     containerHeight: window.innerHeight - 500,
   })
 
-  if (isFetching) return <div>Loading...</div>
+   if (isFetching && !data) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>
 
   return (
