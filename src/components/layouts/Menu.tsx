@@ -3,6 +3,7 @@
 import { useRoute } from '@/composable/useRoute'
 import MenuSidebar from '../MenuSidebar'
 import {
+  Fa42Group,
   FaArrowDownWideShort,
   FaArrowsLeftRight,
   FaArrowsToCircle,
@@ -33,6 +34,7 @@ import {
   FaScroll,
   FaTableList,
   FaTarpDroplet,
+  FaToggleOff,
 } from 'react-icons/fa6'
 
 export default function ListMenu() {
@@ -202,6 +204,16 @@ export default function ListMenu() {
       name: 'Display media',
       href: '/v1/displaymedia',
       icon: () => <FaHouseLaptop />,
+    },
+    {
+      name: 'Array State',
+      href: '/v1/arraystate',
+      icon: () => <FaHouseLaptop />,
+    },
+    {
+      name: 'Toggle',
+      href: '/v1/toggle',
+      icon: () => <Fa42Group />,
     },
   ]
   return <MenuSidebar menu={menu} route={route} />
