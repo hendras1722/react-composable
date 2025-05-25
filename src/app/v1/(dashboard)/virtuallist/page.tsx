@@ -12,18 +12,8 @@ export interface JSONDummy {
 }
 
 export default function VirtualListExample() {
-  const {
-    data,
-    error,
-    isLoading: isFetching,
-    mutate: execute,
-  } = useFetch<JSONDummy[]>(
-    'https://microsoftedge.github.io/Demos/json-dummy-data/1MB.json',
-    {},
-    {
-      revalidateOnFocus: true,
-      errorRetryCount: 3,
-    }
+  const { data, error, isFetching, execute } = useFetch<JSONDummy[]>(
+    'https://microsoftedge.github.io/Demos/json-dummy-data/1MB.json'
   )
   const longList = Array.from({ length: 100000 }, (_, i) => {
     return {
