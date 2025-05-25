@@ -356,7 +356,7 @@ export function useFetch<T>(
   const options = useMemo(
     () => ({
       immediate: true,
-      refetch: false,
+      refetch: true, // Changed to true by default for URL reactivity
       timeout: 0,
       updateDataOnError: false,
       ...parsedUseFetchOptions,
@@ -659,18 +659,13 @@ export function useFetch<T>(
     }
   }, [execute, options.immediate])
 
+  // Fixed: URL reactivity - always refetch when URL changes (not just when refetch is true)
   useEffect(() => {
-    if (
-      options.refetch &&
-      hasExecutedRef.current &&
-      url !== previousUrlRef.current
-    ) {
+    if (hasExecutedRef.current && url !== previousUrlRef.current) {
       execute()
     }
-    if (url !== previousUrlRef.current) {
-      previousUrlRef.current = url
-    }
-  }, [execute, url, options.refetch])
+    previousUrlRef.current = url
+  }, [execute, url])
 
   // -------------------------------------------------------------------------
   // Method & Type Setting Callbacks
@@ -779,16 +774,9 @@ export function useFetch<T>(
   )
 
   // -------------------------------------------------------------------------
-  // Shell & waitUntilFinished
-  // -------------------------------------------------------------------------
-
-  // The 'shell' provides a consistent interface to the hook, even before a fetch has completed.
-
-  // -------------------------------------------------------------------------
   // Final Returned Object (with Method & Type Bindings)
   // -------------------------------------------------------------------------
 
-  // Explicitly define the type of finalShell
   const finalShell = useMemo<
     UseFetchReturn<T> & PromiseLike<UseFetchReturn<T>>
   >(() => {
@@ -814,8 +802,8 @@ export function useFetch<T>(
 
     return {
       ...base,
-      ...promiseLike, // Merge the promiseLike
-    } as UseFetchReturn<T> & PromiseLike<UseFetchReturn<T>> // Explicit cast
+      ...promiseLike,
+    } as UseFetchReturn<T> & PromiseLike<UseFetchReturn<T>>
   }, [shell, setMethod, setType, waitUntilFinished])
 
   return finalShell

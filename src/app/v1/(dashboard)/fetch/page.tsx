@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { createFetch, useFetch } from '@/composable/usFetch'
+import { useFetch } from '@/composable/usFetch'
 // import { createFetch, useFetch } from '@msa_cli/react-composable'
 
 interface User {
@@ -17,7 +17,6 @@ export interface Jsonplaceholder {
 }
 export default function FetchData() {
   // Using useFetch to fetch data from an API
-  let AbortController: AbortController | null = null
   const { data, error, abort, execute } = useFetch<User>(
     'https://jsonplaceholder.typicode.com/todos/1',
     {

@@ -1,12 +1,13 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { useClipboard, useFetch } from '@msa_cli/react-composable'
-import { notFound } from 'next/navigation'
-import { useEffect } from 'react'
+import { useClipboard } from '@msa_cli/react-composable'
+// import { notFound } from 'next/navigation'
+// import { useEffect } from 'react'
 // import { notFound } from 'next/navigation'
 // import { useEffect } from 'react'
 import { FaCopy } from 'react-icons/fa6'
+import { Fetching } from './fetching'
 
 export default function Dashboard() {
   const { copy, copied } = useClipboard()
@@ -25,6 +26,7 @@ export default function Dashboard() {
           versions of React and Next.js.
         </div>
       </div>
+
       <div>
         <h3 className="p-5 rounded-lg font-bold">Installation</h3>
         <div className="p-5 rounded-lg bg-gray-100 flex justify-between items-center">
@@ -42,6 +44,10 @@ export default function Dashboard() {
       </div>
       <div>
         <h3 className="p-5 rounded-lg font-bold">Usage Example</h3>
+        <Fetching />
+        <div className="my-3">
+          You can document fetching <a href="/v1/fetch">here</a>
+        </div>
         <div className="p-5 rounded-lg ">
           Simply importing the functions you need from{' '}
           <span className="font-bold text-gray-600 bg-gray-100 p-1 rounded">
