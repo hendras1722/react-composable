@@ -1,6 +1,5 @@
 'use client'
-import { useIdlePage } from '@/composable/useIdleDetector'
-import { useIdle, useTimestamp } from '@msa_cli/react-composable'
+import { useIdle, useTimestamp, useIdlePage } from '@msa_cli/react-composable'
 
 export default function FormPage() {
   const { idle, lastActive } = useIdle(5000) // 5 seconds
@@ -42,7 +41,7 @@ export default function FormPage() {
       <pre className="bg-gray-100 rounded-lg overflow-auto h-96 mt-3  p-3">
         <code className="text-black">{`
 'use client'
-import { useIdle, useTimestamp } from '@msa_cli/react-composable'
+import { useIdle, useTimestamp, useIdlePage } from '@msa_cli/react-composable'
 
 export default function FormPage() {
   const { idle, lastActive } = useIdle(5000) // 5 seconds
@@ -50,10 +49,36 @@ export default function FormPage() {
 
   const idledFor = Math.floor((now - lastActive) / 1000)
 
+  // idle using per page
+
+  const { isIdle, isSystemIdle } = useIdlePage({
+    idleTimeout: 5000, // 5 seconds of inactivity
+    syncInterval: 2000, // Check every 2 seconds
+    onIdleChange: (idle) => {
+      console.log('System idle state changed:', idle)
+    },
+  })
+
   return (
     <div>
       For demonstration purpose, the idle timeout is set to 5s in this demo
       (default 1min).
+
+      <div className="mt-5">
+        using idle different tab activity, pls open tab browser using this page
+        <div>
+          <p className="my-3">
+            <b>Current Tab Idle:</b> {isIdle ? 'Yes' : 'No'}
+          </p>
+          <p className="my-3">
+            <b>System Idle (All Tabs):</b> {isSystemIdle ? 'Yes' : 'No'}
+          </p>
+          <p className="mt-2">
+            (Move your mouse or type something to reset the timer. Open in
+            multiple tabs to test the system-wide idle state.)
+          </p>
+        </div>
+      </div>
       <div className="my-2 font-bold">Idle: {idle ? 'Yes' : 'No'}</div>
       <div className="font-bold">Last Active: {idledFor}</div>
     </div>
